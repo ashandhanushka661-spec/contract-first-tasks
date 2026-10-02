@@ -5,7 +5,7 @@ import "buf/validate/validate.proto";
 
 message Task {
   string id = 1;
-  string title = 2;
+  string title = 4;
   bool done = 3;
 }
 
