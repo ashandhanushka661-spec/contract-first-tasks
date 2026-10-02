@@ -1,0 +1,22 @@
+edition = "2024";
+package tasks.v1;
+
+import "buf/validate/validate.proto";
+
+message Task {
+  string id = 1;
+  string title = 2;
+  bool done = 3;
+}
+
+message CreateTaskRequest {
+  string title = 1 [(buf.validate.field).string = {min_len: 1, max_len: 120}];
+}
+message CreateTaskResponse { Task task = 1; }
+message ListTasksRequest {}
+message ListTasksResponse { repeated Task tasks = 1; }
+
+service TaskService {
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+}
